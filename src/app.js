@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URL, { dbName: process.env.MONGO_DB_NAME })
 
 // Rutas
 app.use('/api/auth/signup', signupRoutes); // Rutas de registro 
-app.use('/api/auth/login', loginRoutes);    // Rutas de inicio de sesión
+app.use('/api/auth', loginRoutes);    // Rutas de inicio de sesión
 
 // Puerto de la aplicación
 const port = process.env.PORT || 3000;
