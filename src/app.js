@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { config } = require('dotenv'); 
+
+
 config();
 
 // Importar las rutas
@@ -17,6 +19,12 @@ if (!process.env.MONGO_URL || !process.env.MONGO_DB_NAME) {
   console.error('❌ ERROR: Variables de entorno faltantes.');
   process.exit(1);
 }
+
+// JWT
+const JWT_SECRET = process.env.JWT_SECRET;
+module.exports = { JWT_SECRET };
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
+module.exports = { JWT_EXPIRES_IN };
 
 // Conexión a MongoDB con manejo de errores
 mongoose.connect(process.env.MONGO_URL, { dbName: process.env.MONGO_DB_NAME })

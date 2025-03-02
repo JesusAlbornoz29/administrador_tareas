@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
 
     // Usar el método comparePassword del modelo
     const isMatch = await user.comparePassword(password);
-    console.log('Contraseña ingresada:', password);
+    console.log('Contraseña ingresada:', user.password);
     console.log('Contraseña en la base de datos:', user.password);
     console.log('Contraseña coincide:', isMatch);
 
