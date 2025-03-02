@@ -1,0 +1,21 @@
+{
+  "name": "administrador-de-tareas",
+  "version": "0.0.1",
+  "description": "Creando un administrador de tareas",
+  "license": "ISC",
+  "author": "Alfredo J Albornoz",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.11.0",
+    "nodemon": "^3.1.9"
+  }
+}
