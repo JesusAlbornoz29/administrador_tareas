@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/users.model');
+const { verificar } = require('../app');
+
 
 // Ruta para iniciar sesión
 router.post('/login', async (req, res) => {
@@ -49,5 +51,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error en el servidor' });
   }
 });
+
 
 module.exports = router;
