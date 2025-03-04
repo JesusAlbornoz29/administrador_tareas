@@ -1,27 +1,19 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const token = localStorage.getItem('token');
 
-    // Verificar si hay un token
     if (!token) {
         alert('Por favor, inicia sesión primero.');
         window.location.href = 'index.html';
         return;
     }
 
-    // Mostrar tareas al cargar la página
     await mostrarTareas();
 
-    // Manejar el envío del formulario para crear una nueva tarea
     document.getElementById('nuevaTareaForm').addEventListener('submit', async function (event) {
         event.preventDefault();
     
         const title = document.getElementById('nuevaTarea').value;
-        const token = localStorage.getItem('token');
-    
-        // Decodifica el token para obtener el userId
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const userId = payload.userId; // Asegúrate de que tu token contenga el userId
-    
+
         try {
             const response = await fetch('/api/tasks', {
                 method: 'POST',
@@ -29,9 +21,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ title, userId }), // Incluir userId
+                body: JSON.stringify({ title }),
             });
-    
+
             if (response.ok) {
                 const nuevaTarea = await response.json();
                 document.getElementById('tareasList').appendChild(crearElementoTarea(nuevaTarea));
@@ -55,7 +47,7 @@ async function mostrarTareas() {
         const response = await fetch('/api/tasks', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`, // Enviar el token
+                'Authorization': `Bearer ${token}`,
             },
         });
 
@@ -76,5 +68,69 @@ async function mostrarTareas() {
 function crearElementoTarea(tarea) {
     const li = document.createElement('li');
     li.textContent = tarea.title;
+
+    const editarBtn = document.createElement('button');
+    editarBtn.textContent = 'Editar';
+    editarBtn.onclick = () => editarTarea(tarea._id, tarea.title);
+    
+    const borrarBtn = document.createElement('button');
+    borrarBtn.textContent = 'Borrar';
+    borrarBtn.onclick = () => borrarTarea(tarea._id);
+
+    li.appendChild(editarBtn);
+    li.appendChild(borrarBtn);
+    
     return li;
+}
+
+// Función para editar tarea
+async function editarTarea(id, title) {
+    const nuevoTitulo = prompt("Ingrese el nuevo título:", title);
+    if (nuevoTitulo) {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`/api/tasks/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ title: nuevoTitulo }),
+            });
+
+            if (response.ok) {
+                document.getElementById('tareasList').innerHTML = ''; // Limpiar la lista
+                await mostrarTareas(); // Volver a cargar las tareas
+            } else {
+                alert('Error al editar la tarea');
+            }
+        } catch (error) {
+            console.error('Error al editar la tarea:', error);
+        }
+    }
+}
+
+// Función para borrar tarea
+async function borrarTarea(id) {
+    const confirmacion = confirm("¿Estás seguro de que deseas borrar esta tarea?");
+    if (confirmacion) {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`/api/tasks/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                document.getElementById('tareasList').innerHTML = ''; // Limpiar la lista
+                await mostrarTareas(); // Volver a cargar las tareas
+            } else {
+                alert('Error al borrar la tarea');
+            }
+        } catch (error) {
+            console.error('Error al borrar la tarea:', error);
+        }
+    }
 }

@@ -50,4 +50,43 @@ router.get('/', verificar, async (req, res) => {
     }
 });
 
+// Actualizar una tarea por ID
+router.put('/:id', verificar, async (req, res) => {
+    const { title } = req.body;
+    const userId = req.decoded.userId;
+
+    try {
+        const task = await Task.findOneAndUpdate(
+            { _id: req.params.id, userId }, // Asegúrate de que el usuario sea el propietario
+            { title },
+            { new: true } // Devuelve la tarea actualizada
+        );
+
+        if (!task) {
+            return res.status(404).json({ message: 'Tarea no encontrada o no autorizada.' });
+        }
+
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Eliminar una tarea por ID
+router.delete('/:id', verificar, async (req, res) => {
+    const userId = req.decoded.userId;
+
+    try {
+        const task = await Task.findOneAndDelete({ _id: req.params.id, userId }); // Asegúrate de que el usuario sea el propietario
+
+        if (!task) {
+            return res.status(404).json({ message: 'Tarea no encontrada o no autorizada.' });
+        }
+
+        res.status(204).send(); // Elimina la tarea y no devuelve contenido
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
 module.exports = router;

@@ -9,24 +9,15 @@
   <link rel="icon" type="image/x-icon" href="./assets/DH_Logo_Black.png">
   <meta name="description" content="Digital House CTD | Proyecto integrador | FRONTEND II" />
 
-  <!-- ----------------------------- estilos CSS ----------------------------- -->
   <link rel="stylesheet" href="./css/tasksStyles.css">
-
-  <!-- ------------------- libreria de iconos Fontawesome -------------------- -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- ------------------------------ librerias ------------------------------ -->
-  <!-- Sweet Alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Animate on scroll -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-
-  <!-- ------------------------- logica de la página ------------------------- -->
-  <!-- Script de lógica de la página --> 
+  
   <script src="./scripts/tasks.js"></script>
   <script>
     window.onload = function() {
@@ -40,28 +31,24 @@
         document.getElementById('username').innerText = localStorage.getItem('email');
       }
   
-      // Manejar el evento de clic en el botón de cerrar sesión
       document.getElementById('closeApp').onclick = function() {
-        localStorage.removeItem('token'); // Eliminar el token
-        localStorage.removeItem('userEmail'); // Eliminar el email
-        window.location.href = 'index.html'; // Redirigir a index.html
+        localStorage.removeItem('token');
+        localStorage.removeItem('userEmail');
+        window.location.href = 'index.html';
       };
     };
   </script>
 
-  
 </head>
 
 <body>
 
-  <!-- cabecera con barra de navegación -->
   <header class="container">
     <nav>
       <a href="index.html"><h1>To-Do App</h1></a>
 
       <div class="user-info">
-        <p id="username">username</p> <!-- Cambiar a un ID -->
-        <div class="user-image"></div>
+        <p id="username">username</p>
         <button id="closeApp"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
       </div>
     </nav>
@@ -76,7 +63,6 @@
     <h2>Tareas</h2>
     <ul id="tareasList" class="tareas-pendientes"></ul>
   </main>
-
 
   <footer>
     <img src="./assets/DH_Logo_White.png" alt="">
