@@ -18,6 +18,8 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       if (response.ok) {
         // Guardar el token en localStorage
         localStorage.setItem('token', data.token);
+        // Guardar el email en localStorage
+        localStorage.setItem('email', email);
         // Redirigir a mis-tareas.html
         window.location.href = 'mis-tareas.html';
       } else {

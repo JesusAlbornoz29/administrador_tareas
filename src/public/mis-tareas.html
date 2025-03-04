@@ -33,6 +33,9 @@
       if (!token) {
         alert('Por favor, inicia sesión primero.');
         window.location.href = 'index.html';
+      } else {
+        // Mostrar el email en el lugar de "username"
+        document.getElementById('username').innerText = localStorage.getItem('email');
       }
     };
   </script>
@@ -45,10 +48,10 @@
   <!-- cabecera con barra de navegación -->
   <header class="container">
     <nav>
-      <h1>To-Do App</h1>
+      <a href="index.html"><h1>To-Do App</h1></a>
 
       <div class="user-info">
-        <p>username</p>
+        <p id="username">username</p> <!-- Cambiar a un ID -->
         <div class="user-image"></div>
         <button id="closeApp"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
       </div>
