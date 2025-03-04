@@ -67,16 +67,23 @@ async function mostrarTareas() {
 // Función para crear un elemento de tarea
 function crearElementoTarea(tarea) {
     const li = document.createElement('li');
-    li.textContent = tarea.title;
+
+    // Crear un span para el texto de la tarea
+    const tareaTexto = document.createElement('span');
+    tareaTexto.textContent = tarea.title;
 
     const editarBtn = document.createElement('button');
     editarBtn.textContent = 'Editar';
+    editarBtn.classList.add('editar');
     editarBtn.onclick = () => editarTarea(tarea._id, tarea.title);
     
     const borrarBtn = document.createElement('button');
     borrarBtn.textContent = 'Borrar';
+    borrarBtn.classList.add('borrar');
     borrarBtn.onclick = () => borrarTarea(tarea._id);
 
+    // Agregar el texto de la tarea y los botones al li
+    li.appendChild(tareaTexto);
     li.appendChild(editarBtn);
     li.appendChild(borrarBtn);
     

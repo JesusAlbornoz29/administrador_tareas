@@ -234,3 +234,55 @@ footer {
 footer img {
     height: 100%;
 }
+
+/* Estilos para la lista de tareas */
+.tareas-pendientes li {
+    display: flex;
+    justify-content: space-between; /* Espacio entre tarea y botones */
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px 0;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+.tareas-pendientes li:hover {
+    background-color: #f0f0f0;
+}
+
+.tareas-pendientes span {
+    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+.tareas-pendientes button {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.tareas-pendientes button.editar {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+}
+
+.tareas-pendientes button.editar:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.tareas-pendientes button.borrar {
+    background-color: #f44336; /* Rojo */
+    color: white;
+}
+
+.tareas-pendientes button.borrar:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+}
