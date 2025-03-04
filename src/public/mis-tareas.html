@@ -27,6 +27,7 @@
 
   <!-- ------------------------- logica de la página ------------------------- -->
   <!-- Script de lógica de la página --> 
+  <script src="./scripts/tasks.js"></script>
   <script>
     window.onload = function() {
       const token = localStorage.getItem('token');
@@ -67,23 +68,13 @@
   </header>
 
   <main class="container">
-    <!-- carga de tareas -->
-    <form class="nueva-tarea">
-      <input id="nuevaTarea" type="text" placeholder="nueva tarea">
+    <form id="nuevaTareaForm">
+      <input id="nuevaTarea" type="text" placeholder="nueva tarea" required>
       <button type="submit"><i class="fa-solid fa-pencil"></i> Crear tarea</button>
     </form>
-
-    <!-- contenedor vacío para las que pasen a pendientes -->
-    <ul class="tareas-pendientes">
-
-    </ul>
-
-    <h2>Tareas finalizadas <span id="cantidad-finalizadas">0</span></h2>
-    <!-- contenedor vacío para las que pasen a terminadas -->
-    <ul class="tareas-terminadas">
-
-    </ul>
-
+  
+    <h2>Tareas</h2>
+    <ul id="tareasList" class="tareas-pendientes"></ul>
   </main>
 
 

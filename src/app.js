@@ -10,6 +10,7 @@ config();
 // Importar las rutas
 const signupRoutes = require('./routes/signup.route'); 
 const loginRoutes = require('./routes/login.route');   
+const taskRoutes = require('./routes/task.routes');
 
 const app = express(); 
 
@@ -76,6 +77,7 @@ mongoose.connect(process.env.MONGO_URL, { dbName: process.env.MONGO_DB_NAME })
 // Rutas
 app.use('/api/auth/signup', signupRoutes); // Rutas de registro 
 app.use('/api/auth', loginRoutes);    // Rutas de inicio de sesión
+app.use('/api/tasks', taskRoutes);    // Rutas de tareas
 
 // Puerto de la aplicación
 const port = process.env.PORT || 3000;
