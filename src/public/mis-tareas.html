@@ -26,17 +26,25 @@
 
 
   <!-- ------------------------- logica de la página ------------------------- -->
-  <!-- <script src="./scripts/taks.js"></script> -->
+  <!-- Script de lógica de la página --> 
   <script>
     window.onload = function() {
       const token = localStorage.getItem('token');
+      const userEmail = localStorage.getItem('userEmail');
+  
       if (!token) {
         alert('Por favor, inicia sesión primero.');
         window.location.href = 'index.html';
       } else {
-        // Mostrar el email en el lugar de "username"
         document.getElementById('username').innerText = localStorage.getItem('email');
       }
+  
+      // Manejar el evento de clic en el botón de cerrar sesión
+      document.getElementById('closeApp').onclick = function() {
+        localStorage.removeItem('token'); // Eliminar el token
+        localStorage.removeItem('userEmail'); // Eliminar el email
+        window.location.href = 'index.html'; // Redirigir a index.html
+      };
     };
   </script>
 
