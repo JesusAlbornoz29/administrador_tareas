@@ -1,8 +1,8 @@
-const express = require('express');
-const Jwt = require('jsonwebtoken');
-
-const mongoose = require('mongoose');
-const { config } = require('dotenv'); 
+const express = require('express'); // Importar Express para el servidor web
+const Jwt = require('jsonwebtoken'); // Importar JWT para autenticación
+const path = require('path'); // Importar path para manejar rutas
+const mongoose = require('mongoose'); // Importar Mongoose para la conexión a MongoDB
+const { config } = require('dotenv');  // Importar dotenv para variables de entorno
 
 
 config();
@@ -12,6 +12,20 @@ const signupRoutes = require('./routes/signup.route');
 const loginRoutes = require('./routes/login.route');   
 
 const app = express(); 
+
+// Middleware para servir archivos estaticos dede la carpeta public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta para servi el `index.html` cuando alguien entre a la raiz "/"
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Ruta para servir el `mis-tareas.html` cuando alguien entre a "/mis-tareas"
+app.get('/mis-tareas', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'mis-tareas.html'));
+});
+
 
 // Middleware para procesar JSON
 app.use(express.json()); 
